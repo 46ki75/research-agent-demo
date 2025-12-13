@@ -28,6 +28,9 @@ from bedrock_agentcore.memory.integrations.strands.session_manager import (
     AgentCoreMemorySessionManager,
 )
 
+from mcp.client.streamable_http import streamable_http_client
+from strands import Agent
+from strands.tools.mcp import MCPClient
 
 MEM_ID = os.environ.get("AGENTCORE_MEMORY_ID", "test_memory_e4a0y-ssn9eWBXio")
 ACTOR_ID = "test_actor_id_%s" % datetime.now().strftime("%Y%m%d%H%M%S")
@@ -153,26 +156,33 @@ system_prompt = (
     "You are a helpful and wise assistant that helps manage a collection of proverbs."
 )
 
-# Create Strands agent with tools
-# Note: Frontend tools (set_theme_color, hitl_test) return None - actual execution happens in the UI
-strands_agent = Agent(
-    model=model,
-    system_prompt=system_prompt,
-    tools=[update_proverbs, get_weather, set_theme_color],
-    session_manager=session_manager,
+streamable_http_mcp_client = MCPClient(
+    lambda: streamable_http_client("https://knowledge-mcp.global.api.aws")
 )
 
-# Wrap with AG-UI integration
-agui_agent = StrandsAgent(
-    agent=strands_agent,
-    name="proverbs_agent",
-    description="A proverbs assistant that collaborates with you to manage proverbs",
-    config=shared_state_config,
-)
+with streamable_http_mcp_client:
+    aws_knowledge_tools = streamable_http_mcp_client.list_tools_sync()
 
-# Create the FastAPI app
-agent_path = os.getenv("AGENT_PATH", "/")
-app = create_strands_app(agui_agent, agent_path)
+    # Create Strands agent with tools
+    # Note: Frontend tools (set_theme_color, hitl_test) return None - actual execution happens in the UI
+    strands_agent = Agent(
+        model=model,
+        system_prompt=system_prompt,
+        tools=[update_proverbs, get_weather, set_theme_color, aws_knowledge_tools],
+        session_manager=session_manager,
+    )
+
+    # Wrap with AG-UI integration
+    agui_agent = StrandsAgent(
+        agent=strands_agent,
+        name="proverbs_agent",
+        description="A proverbs assistant that collaborates with you to manage proverbs",
+        config=shared_state_config,
+    )
+
+    # Create the FastAPI app
+    agent_path = os.getenv("AGENT_PATH", "/")
+    app = create_strands_app(agui_agent, agent_path)
 
 if __name__ == "__main__":
     import uvicorn
