@@ -10,6 +10,7 @@ This example demonstrates a Strands agent integrated with AG-UI, featuring:
 import json
 import os
 from typing import List
+from datetime import datetime
 
 from ag_ui_strands import (
     StrandsAgent,
@@ -29,8 +30,8 @@ from bedrock_agentcore.memory.integrations.strands.session_manager import (
 
 
 MEM_ID = os.environ.get("AGENTCORE_MEMORY_ID", "test_memory_e4a0y-ssn9eWBXio")
-ACTOR_ID = "test_actor_id"
-SESSION_ID = "test_session_id"
+ACTOR_ID = "test_actor_id_%s" % datetime.now().strftime("%Y%m%d%H%M%S")
+SESSION_ID = "test_session_id_%s" % datetime.now().strftime("%Y%m%d%H%M%S")
 
 load_dotenv()
 
