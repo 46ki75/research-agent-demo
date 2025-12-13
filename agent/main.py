@@ -20,7 +20,7 @@ from ag_ui_strands import (
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 from strands import Agent, tool
-from strands.models.openai import OpenAIModel
+from strands.models import BedrockModel
 
 load_dotenv()
 
@@ -126,9 +126,8 @@ shared_state_config = StrandsAgentConfig(
 
 # Initialize OpenAI model
 api_key = os.getenv("OPENAI_API_KEY", "")
-model = OpenAIModel(
-    client_args={"api_key": api_key},
-    model_id="gpt-4o",
+model = BedrockModel(
+    model_id="global.amazon.nova-2-lite-v1:0",
 )
 
 system_prompt = (
@@ -158,5 +157,5 @@ app = create_strands_app(agui_agent, agent_path)
 if __name__ == "__main__":
     import uvicorn
 
-    port  = int(os.getenv("AGENT_PORT", 8000))
+    port = int(os.getenv("AGENT_PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
