@@ -12,4 +12,5 @@ dependencies = [
     "strands-agents[OpenAI]>=1.15.0",
     "strands-agents-tools>=0.2.14",
     "ag_ui_strands~=0.1.0",
+    "bedrock-agentcore[strands-agents]>=1.1.1",
 ]
