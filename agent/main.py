@@ -22,7 +22,26 @@ from pydantic import BaseModel, Field
 from strands import Agent, tool
 from strands.models import BedrockModel
 
+from bedrock_agentcore.memory.integrations.strands.config import AgentCoreMemoryConfig
+from bedrock_agentcore.memory.integrations.strands.session_manager import (
+    AgentCoreMemorySessionManager,
+)
+
+
+MEM_ID = os.environ.get("AGENTCORE_MEMORY_ID", "test_memory_e4a0y-ssn9eWBXio")
+ACTOR_ID = "test_actor_id"
+SESSION_ID = "test_session_id"
+
 load_dotenv()
+
+agentcore_memory_config = AgentCoreMemoryConfig(
+    memory_id=MEM_ID, session_id=SESSION_ID, actor_id=ACTOR_ID
+)
+
+# Create session manager
+session_manager = AgentCoreMemorySessionManager(
+    agentcore_memory_config=agentcore_memory_config, region_name="ap-northeast-1"
+)
 
 
 class ProverbsList(BaseModel):
@@ -125,7 +144,6 @@ shared_state_config = StrandsAgentConfig(
 )
 
 # Initialize OpenAI model
-api_key = os.getenv("OPENAI_API_KEY", "")
 model = BedrockModel(
     model_id="global.amazon.nova-2-lite-v1:0",
 )
@@ -140,6 +158,7 @@ strands_agent = Agent(
     model=model,
     system_prompt=system_prompt,
     tools=[update_proverbs, get_weather, set_theme_color],
+    session_manager=session_manager,
 )
 
 # Wrap with AG-UI integration
