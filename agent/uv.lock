@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.12, <3.14"
 
 [[package]]
@@ -16,16 +16,16 @@ wheels = [
 
 [[package]]
 name = "ag-ui-strands"
-version = "0.1.0b12"
+version = "0.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ag-ui-protocol" },
     { name = "fastapi" },
     { name = "strands-agents" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3c/de/1a911255609d7efb33b65d23ce11541defeb98a87212a220d03548bcdae7/ag_ui_strands-0.1.0b12.tar.gz", hash = "sha256:2bda63fcc9f6cb15ade1aee0701c2a2a36373ebe8c59b473761a2e69d18e914f", size = 167391, upload-time = "2025-12-03T04:05:15.683Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2c/c6/aefd6e3121b57167d2b00adbdd7dd954f4a10a16fe873fb1b9c9d1cff66a/ag_ui_strands-0.1.0.tar.gz", hash = "sha256:8471a5c01dbdc8c6066fe816d88f8025c5bb445263fd643173000e6e5d8cf632", size = 167375, upload-time = "2025-12-03T15:46:03.113Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/05/8f/4d1ad9f3b63b905adbcc141d2ed91e241b154db02105372c74df7bc5a32d/ag_ui_strands-0.1.0b12-py3-none-any.whl", hash = "sha256:195c90b6c3ff470b3997ca45ed1bbb3dd0d0a5673b12cac2052281dcbc35c090", size = 10641, upload-time = "2025-12-03T04:05:14.3Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/c0/1be50881521cae7f19db0d7f799c37e242d444b0e9104a787453a710dc1f/ag_ui_strands-0.1.0-py3-none-any.whl", hash = "sha256:faa65c3d8688d5c863cf79a8c8078bf8d9f4609488d7bdfe9db41077bb43de3b", size = 10619, upload-time = "2025-12-03T15:46:02.111Z" },
 ]
 
 [[package]]
@@ -169,7 +169,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "ag-ui-protocol", specifier = ">=0.1.5" },
-    { name = "ag-ui-strands", specifier = "==0.1.0b12" },
+    { name = "ag-ui-strands", specifier = "~=0.1.0" },
     { name = "fastapi", specifier = ">=0.115.12" },
     { name = "strands-agents", extras = ["openai"], specifier = ">=1.15.0" },
     { name = "strands-agents-tools", specifier = ">=0.2.14" },
