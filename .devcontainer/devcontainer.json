@@ -47,7 +47,7 @@
     "./features/uv": {}
   },
   "remoteEnv": {
-    "AWS_PROFILE": "examples"
+    "AWS_PROFILE": "46ki75-examples"
   },
   "mounts": [
     "type=bind,source=${localEnv:HOME}/.aws/,target=/home/vscode/.aws/"
