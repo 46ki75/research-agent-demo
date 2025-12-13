@@ -7,7 +7,7 @@ from bedrock_agentcore.memory.integrations.strands.session_manager import (
     AgentCoreMemorySessionManager,
 )
 
-
+MEM_ID = "test_memory_e4a0y-ssn9eWBXio"
 ACTOR_ID = "test_actor_id_%s" % datetime.now().strftime("%Y%m%d%H%M%S")
 SESSION_ID = "test_session_id_%s" % datetime.now().strftime("%Y%m%d%H%M%S")
 
@@ -21,7 +21,7 @@ def main():
 
     # Create session manager
     session_manager = AgentCoreMemorySessionManager(
-        agentcore_memory_config=agentcore_memory_config, region_name="us-east-1"
+        agentcore_memory_config=agentcore_memory_config, region_name="ap-northeast-1"
     )
 
     # Create agent with session manager
