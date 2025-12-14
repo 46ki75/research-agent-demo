@@ -1,4 +1,5 @@
 import "./App.css";
+import "@copilotkit/react-ui/styles.css";
 import { CopilotKitPage } from "./components/CopilotKitPage";
 import { CopilotKit } from "@copilotkit/react-core";
 
