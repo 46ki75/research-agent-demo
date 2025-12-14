@@ -33,6 +33,8 @@ from mcp.client.streamable_http import streamable_http_client
 from strands import Agent
 from strands.tools.mcp import MCPClient
 
+from fastapi.middleware.cors import CORSMiddleware
+
 MEM_ID = os.environ.get("AGENTCORE_MEMORY_ID", "test_memory_e4a0y-ssn9eWBXio")
 ACTOR_ID = "test_actor_id_%s" % datetime.now().strftime("%Y%m%d%H%M%S")
 SESSION_ID = "test_session_id_%s" % datetime.now().strftime("%Y%m%d%H%M%S")
@@ -199,8 +201,17 @@ with streamable_http_mcp_client:
     )
 
     # Create the FastAPI app
-    agent_path = os.getenv("AGENT_PATH", "/")
+    agent_path = os.getenv("AGENT_PATH", "/api/copilotkit")
     app = create_strands_app(agui_agent, agent_path)
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:5173"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
 
 if __name__ == "__main__":
     import uvicorn
