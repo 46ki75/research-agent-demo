@@ -1,0 +1,14 @@
+{
+  "name": "research-agent-demo",
+  "scripts": {
+    "dev": "concurrently \"pnpm run dev:ui\" \"pnpm run dev:agent\" --names ui,agent --prefix-colors blue,green --kill-others",
+    "dev:agent": "./scripts/run-agent.sh || scripts\\run-agent.bat",
+    "dev:ui": "cd packages/ui && pnpm run dev",
+    "lint": "eslint .",
+    "install:agent": "./scripts/setup-agent.sh || scripts\\setup-agent.bat",
+    "postinstall": "pnpm run install:agent"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
