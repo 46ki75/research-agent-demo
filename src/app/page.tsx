@@ -33,6 +33,21 @@ export default function CopilotKitPage() {
     },
   });
 
+  // Sample Prompt: "Show a notification that says 'Hello from CopilotKit!'"
+  useFrontendTool({
+    name: "notify",
+    parameters: [
+      {
+        name: "message",
+        description: "The message to show in the notification.",
+        required: true,
+      },
+    ],
+    handler({ message }) {
+      window.alert(message);
+    },
+  });
+
   return (
     <main
       style={
@@ -100,7 +115,7 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
         <WeatherCard themeColor={themeColor} location={props.args.location} />
       ),
     },
-    [themeColor],
+    [themeColor]
   );
 
   //🪁 Default Generative UI: https://docs.copilotkit.ai/strands/generative-ui/backend-tools
@@ -110,7 +125,7 @@ function YourMainContent({ themeColor }: { themeColor: string }) {
         <DefaultToolComponent themeColor={themeColor} {...props} />
       ),
     },
-    [themeColor],
+    [themeColor]
   );
 
   return (

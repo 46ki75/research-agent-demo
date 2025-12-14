@@ -4,6 +4,7 @@ This example demonstrates a Strands agent integrated with AG-UI, featuring:
 - Shared state management between agent and UI
 - Backend tool execution (get_weather, update_proverbs)
 - Frontend tools (set_theme_color)
+- Frontend tools (norify)
 - Generative UI rendering
 """
 
@@ -76,6 +77,17 @@ def set_theme_color(theme_color: str):
 
     Args:
         theme_color: The color to set as theme
+    """
+    return None
+
+
+@tool
+def notify(message: str):
+    """
+    Docstring for notify
+
+    :param message: Description
+    :type message: str
     """
     return None
 
@@ -168,7 +180,13 @@ with streamable_http_mcp_client:
     strands_agent = Agent(
         model=model,
         system_prompt=system_prompt,
-        tools=[update_proverbs, get_weather, set_theme_color, aws_knowledge_tools],
+        tools=[
+            update_proverbs,
+            get_weather,
+            set_theme_color,
+            notify,
+            aws_knowledge_tools,
+        ],
         session_manager=session_manager,
     )
 
