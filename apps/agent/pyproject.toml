@@ -1,5 +1,5 @@
 [project]
-name = "aws-strands-server"
+name = "agent"
 version = "0.1.0"
 description = "Strands integration server for AG-UI using OpenAI models"
 authors = [{ name = "AG-UI Contributors" }]

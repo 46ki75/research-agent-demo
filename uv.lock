@@ -4,8 +4,7 @@ requires-python = ">=3.12, <3.14"
 
 [manifest]
 members = [
-    "aws-strands-server",
-    "research-agent-demo",
+    "agent",
 ]
 
 [[package]]
@@ -32,6 +31,31 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/2c/c6/aefd6e3121b57167d2b00adbdd7dd954f4a10a16fe873fb1b9c9d1cff66a/ag_ui_strands-0.1.0.tar.gz", hash = "sha256:8471a5c01dbdc8c6066fe816d88f8025c5bb445263fd643173000e6e5d8cf632", size = 167375, upload-time = "2025-12-03T15:46:03.113Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f8/c0/1be50881521cae7f19db0d7f799c37e242d444b0e9104a787453a710dc1f/ag_ui_strands-0.1.0-py3-none-any.whl", hash = "sha256:faa65c3d8688d5c863cf79a8c8078bf8d9f4609488d7bdfe9db41077bb43de3b", size = 10619, upload-time = "2025-12-03T15:46:02.111Z" },
+]
+
+[[package]]
+name = "agent"
+version = "0.1.0"
+source = { virtual = "apps/agent" }
+dependencies = [
+    { name = "ag-ui-protocol" },
+    { name = "ag-ui-strands" },
+    { name = "bedrock-agentcore", extra = ["strands-agents"] },
+    { name = "fastapi" },
+    { name = "strands-agents", extra = ["openai"] },
+    { name = "strands-agents-tools" },
+    { name = "uvicorn" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "ag-ui-protocol", specifier = ">=0.1.5" },
+    { name = "ag-ui-strands", specifier = "~=0.1.0" },
+    { name = "bedrock-agentcore", extras = ["strands-agents"], specifier = ">=1.1.1" },
+    { name = "fastapi", specifier = ">=0.115.12" },
+    { name = "strands-agents", extras = ["openai"], specifier = ">=1.15.0" },
+    { name = "strands-agents-tools", specifier = ">=0.2.14" },
+    { name = "uvicorn", specifier = ">=0.34.3" },
 ]
 
 [[package]]
@@ -157,31 +181,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/54/b2/455c0bfcbd772dafd4c9e93c4b713e36790abf9ccbca9b8e661968b29798/aws-requests-auth-0.4.3.tar.gz", hash = "sha256:33593372018b960a31dbbe236f89421678b885c35f0b6a7abfae35bb77e069b2", size = 10096, upload-time = "2020-05-27T23:10:34.742Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/af/11/5dc8be418e1d54bed15eaf3a7461797e5ebb9e6a34869ad750561f35fa5b/aws_requests_auth-0.4.3-py2.py3-none-any.whl", hash = "sha256:646bc37d62140ea1c709d20148f5d43197e6bd2d63909eb36fa4bb2345759977", size = 6838, upload-time = "2020-05-27T23:10:33.658Z" },
-]
-
-[[package]]
-name = "aws-strands-server"
-version = "0.1.0"
-source = { virtual = "agent" }
-dependencies = [
-    { name = "ag-ui-protocol" },
-    { name = "ag-ui-strands" },
-    { name = "bedrock-agentcore", extra = ["strands-agents"] },
-    { name = "fastapi" },
-    { name = "strands-agents", extra = ["openai"] },
-    { name = "strands-agents-tools" },
-    { name = "uvicorn" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "ag-ui-protocol", specifier = ">=0.1.5" },
-    { name = "ag-ui-strands", specifier = "~=0.1.0" },
-    { name = "bedrock-agentcore", extras = ["strands-agents"], specifier = ">=1.1.1" },
-    { name = "fastapi", specifier = ">=0.115.12" },
-    { name = "strands-agents", extras = ["openai"], specifier = ">=1.15.0" },
-    { name = "strands-agents-tools", specifier = ">=0.2.14" },
-    { name = "uvicorn", specifier = ">=0.34.3" },
 ]
 
 [[package]]
@@ -1253,11 +1252,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/c9/74/b3ff8e6c8446842c3
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1e/db/4254e3eabe8020b458f1a747140d32277ec7a271daf1d235b70dc0b4e6e3/requests-2.32.5-py3-none-any.whl", hash = "sha256:2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6", size = 64738, upload-time = "2025-08-18T20:46:00.542Z" },
 ]
-
-[[package]]
-name = "research-agent-demo"
-version = "0.1.0"
-source = { virtual = "." }
 
 [[package]]
 name = "rich"
